@@ -1,14 +1,77 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <meta charset="UTF-8">
-        <title>Title</title>
-    </head>
-    <body>
-        FILTRO
-        <form action="#" th:action="@{/import}" method="post" enctype="multipart/form-data">
-            <input type="file" name="file" />
-            <input type="submit" value="Import" />
-        </form>
-    </body>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+            body {
+                font-family: Arial, sans-serif;
+            }
+            table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+            table, th, td {
+                border: 1px solid #ddd;
+                padding: 8px;
+            }
+            th {
+                background-color: #4CAF50;
+                color: white;
+            }
+            tr:nth-child(even) {
+                background-color: #f2f2f2;
+            }
+            form {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: 20px;
+            }
+            input[type="submit"] {
+                margin-left: 10px;
+                background-color: #4CAF50;
+                border: none;
+                color: white;
+                padding: 10px 20px;
+                text-decoration: none;
+                cursor: pointer;
+            }
+            input[type="submit"]:hover {
+                background-color: #45a049;
+            }
+        </style>
+</head>
+<body>
+    <form action="#" th:action="@{/import}" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" />
+        <input type="submit" value="Import" />
+    </form>
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Código</th>
+            <th>Nombre</th>
+            <th>Número de Comprobante</th>
+            <th>Resumen</th>
+            <th>Monto</th>
+            <th>Fecha de Conclusión</th>
+            <th>Vínculo de Documento Digital</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="tramite : ${tramites}">
+            <td th:text="${tramite.id}"></td>
+            <td th:text="${tramite.codigo}"></td>
+            <td th:text="${tramite.nombre}"></td>
+            <td th:text="${tramite.numeroComprobante}"></td>
+            <td th:text="${tramite.resumen}"></td>
+            <td th:text="${tramite.monto}"></td>
+            <td th:text="${tramite.fechaConclusion}"></td>
+            <td><a th:href="${tramite.vinculoDocumentoDigital}" th:text="${tramite.vinculoDocumentoDigital}"></a></td>
+        </tr>
+        </tbody>
+    </table>
+</body>
 </html>
