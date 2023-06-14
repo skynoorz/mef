@@ -2,6 +2,9 @@ package com.noraroc.mef.controller;
 
 import com.noraroc.mef.dao.TramiteRepository;
 import com.noraroc.mef.entity.Tramite;
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVParser;
+import org.apache.commons.csv.CSVRecord;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,6 +13,18 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.text.NumberFormat;
+import java.text.ParseException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 
 @Controller
 public class TramiteController {
@@ -33,44 +48,54 @@ public class TramiteController {
     public String importCsvFile(@RequestParam("file") MultipartFile file) {
         // TODO
 
-//        // validate file
-//        if (file.isEmpty()) {
-//            return "Please select a CSV file to import.";
-//        }
-//
-//        try (BufferedReader fileReader = new BufferedReader(new InputStreamReader(file.getInputStream(), "UTF-8"));
-//             CSVParser csvParser = new CSVParser(fileReader,
-//                     CSVFormat.DEFAULT.withFirstRecordAsHeader()
-//                             .withIgnoreHeaderCase()
-//                             .withTrim());) {
-//
-//            List<Tramite> tramiteList = new ArrayList<Tramite>();
-//
-//            Iterable<CSVRecord> csvRecords = csvParser.getRecords();
-//
-//            for (CSVRecord csvRecord : csvRecords) {
-//                Tramite entity = new Tramite(
-//                        null,
-//                        csvRecord.get("codigo"),
-//                        csvRecord.get("nombre"),
-//                        csvRecord.get("comprobante"),
-//                        csvRecord.get("resumen"),
-//                        Double.parseDouble(csvRecord.get("monto")),
-//                        LocalDate.parse(csvRecord.get("fecha_conclusion")),
-//                        csvRecord.get("vinculo")
-//                );
-//
-//                tramiteList.add(entity);
-//            }
-//
-//            // save entities in the database
-////            myEntityRepository.saveAll(entities);
-//
-//            return "Successfully imported!";
-//        } catch (IOException e) {
-//            return "error";
-////            throw new RuntimeException("Failed to parse CSV file: " + e.getMessage());
-//        }
-        return "error";
+        // validate file
+        if (file.isEmpty()) {
+            return "error";
+        }
+
+        try (BufferedReader fileReader = new BufferedReader(new InputStreamReader(file.getInputStream(), "UTF-8"));
+             CSVParser csvParser = new CSVParser(fileReader,
+                     CSVFormat.DEFAULT.withDelimiter(';').withFirstRecordAsHeader()
+                             .withIgnoreHeaderCase()
+                             .withTrim());) {
+
+            List<Tramite> tramiteList = new ArrayList<Tramite>();
+
+            Iterable<CSVRecord> csvRecords = csvParser.getRecords();
+            NumberFormat format = NumberFormat.getInstance(Locale.forLanguageTag("es"));
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy");
+
+            for (CSVRecord csvRecord : csvRecords) {
+                try {
+                    Tramite entity = new Tramite(
+                            null,
+                            csvRecord.get("codigo"),
+                            csvRecord.get("nombre"),
+                            csvRecord.get("numeroComprobante"),
+                            csvRecord.get("resumen"),
+                            format.parse(csvRecord.get("monto")).doubleValue(),
+                            LocalDate.parse(csvRecord.get("fechaConclusion"), formatter),
+                            csvRecord.get("vinculoDocumentoDigital")
+                    );
+
+                    tramiteList.add(entity);
+                } catch (NumberFormatException e) {
+                    // Log the error and continue with the next row
+                    System.err.println("Invalid number format in row " + csvRecord.getRecordNumber() + ": " + e.getMessage());
+                } catch (DateTimeParseException e) {
+                    // Log the error and continue with the next row
+                    System.err.println("Invalid date format in row " + csvRecord.getRecordNumber() + ": " + e.getMessage());
+                } catch (ParseException e) {
+                    System.err.println("Invalid date format in row " + csvRecord.getRecordNumber() + ": " + e.getMessage());
+                }
+            }
+
+            // save entities in the database
+            tramiteRepository.saveAll(tramiteList);
+
+            return "success";
+        } catch (IOException e) {
+            return "error";
+        }
     }
 }
