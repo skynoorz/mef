@@ -1,10 +1,14 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-FILTRO
-</body>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+    </head>
+    <body>
+        FILTRO
+        <form action="#" th:action="@{/import}" method="post" enctype="multipart/form-data">
+            <input type="file" name="file" />
+            <input type="submit" value="Import" />
+        </form>
+    </body>
 </html>
