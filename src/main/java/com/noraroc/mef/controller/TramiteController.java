@@ -68,7 +68,6 @@ public class TramiteController {
             for (CSVRecord csvRecord : csvRecords) {
                 try {
                     Tramite entity = new Tramite(
-                            null,
                             csvRecord.get("codigo"),
                             csvRecord.get("nombre"),
                             csvRecord.get("numeroComprobante"),

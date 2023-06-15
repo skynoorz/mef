@@ -7,6 +7,35 @@
 
 
     <style>
+
+
+form {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+    align:center;
+}
+
+form h2 {
+    color: #1c92d2;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+form input[type="file"] {
+    margin-bottom: 20px;
+}
+
+form input[type="submit"] {
+    background-color: #1c92d2;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-transform: uppercase;
+}
            input[type=file] {
             width: 90%;
             margin-bottom: 10px;
@@ -37,23 +66,29 @@
             background-color: #f2f2f2;
         }
         </style>
+
+
+
+
 </head>
 <body>
-    <form action="#" th:action="@{/import}" method="post" enctype="multipart/form-data">
-        <input type="file" name="file" />
-        <input type="submit" value="Import" />
-    </form>
-    <table>
+<form action="#" th:action="@{/import}" method="post" enctype="multipart/form-data">
+    <h2>SUBIR TRAMITES</h2>
+    <input type="file" name="file" />
+    <input type="submit" value="Importar" />
+</form>
+<h2>BUSQUEDA DE TRAMITES</h2>
+<table>
 
         <thead>
         <tr>
-            <th><input type="text" id="filter-id" placeholder="Filter by ID"></th>
-            <th><input type="text" id="filter-codigo" placeholder="Filter by Code"></th>
-            <th><input type="text" id="filter-nombre" placeholder="Filter by Code"></th>
-            <th><input type="text" id="filter-numero-comprobante" placeholder="Filter by Code"></th>
-            <th><input type="text" id="filter-resumen" placeholder="Filter by Code"></th>
-            <th><input type="text" id="filter-monto" placeholder="Filter by Code"></th>
-            <th><input type="text" id="filter-fecha-conclusion" placeholder="Filter by Code"></th>
+            <th><input type="text" id="filter-id" placeholder="ID"></th>
+            <th><input type="text" id="filter-codigo" placeholder="CODIGO"></th>
+            <th><input type="text" id="filter-nombre" placeholder="NOMBRE"></th>
+            <th><input type="text" id="filter-numero-comprobante" placeholder="NRO COMPROBANTE"></th>
+            <th><input type="text" id="filter-resumen" placeholder="RESUMEN"></th>
+            <th><input type="text" id="filter-monto" placeholder="MONTO"></th>
+            <th><input type="text" id="filter-fecha-conclusion" placeholder="FECHA DE CONCLUSION"></th>
             <th><input type="text" id="filter-vinculo" placeholder="Filter by Code"></th>
         </tr>
         <tr>

@@ -15,7 +15,7 @@ import java.time.LocalDate;
 public class Tramite {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String codigo;
@@ -31,13 +31,21 @@ public class Tramite {
     public Tramite(Long id, String codigo, String nombre, String numeroComprobante, String resumen, Double monto, LocalDate fechaConclusion, String vinculoDocumentoDigital) {
         this.codigo = codigo;
         this.nombre = nombre;
-        this.numeroComprobante = numeroComprobante;
-        this.resumen = resumen;
         this.monto = monto;
         this.fechaConclusion = fechaConclusion;
         this.vinculoDocumentoDigital = vinculoDocumentoDigital;
     }
 
     public Tramite() {
+    }
+
+    public Tramite(String codigo, String nombre, String numeroComprobante, String resumen, Double monto, LocalDate fechaConclusion, String vinculoDocumentoDigital) {
+        this.codigo = codigo;
+        this.nombre = nombre;
+        this.numeroComprobante = numeroComprobante;
+        this.resumen = resumen;
+        this.monto = monto;
+        this.fechaConclusion = fechaConclusion;
+        this.vinculoDocumentoDigital = vinculoDocumentoDigital;
     }
 }
