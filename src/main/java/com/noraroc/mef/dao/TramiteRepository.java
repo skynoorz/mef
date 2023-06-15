@@ -15,18 +15,15 @@ public interface TramiteRepository extends JpaRepository<Tramite, Long> {
             " AND (LOWER(nombre) LIKE LOWER(CONCAT('%', :nombre, '%')) OR :nombre IS NULL)" +
             " AND (LOWER(numero_comprobante) LIKE LOWER(CONCAT('%', :numeroComprobante, '%')) OR :numeroComprobante IS NULL)" +
             " AND (LOWER(resumen) LIKE LOWER(CONCAT('%', :resumen, '%')) OR :resumen IS NULL)" +
-            " AND (monto = :monto OR :monto IS NULL)" +
-            " AND (fecha_conclusion = :fechaConclusion OR :fechaConclusion IS NULL)" +
-            " AND (LOWER(vinculo_documento_digital) LIKE LOWER(CONCAT('%', :vinculo, '%')) OR :vinculo IS NULL))",
+            " AND (monto = :monto OR :monto IS NULL))" ,
             nativeQuery = true)
     List<Tramite> buscarPorParametros(@Param("id") Long id,
                                       @Param("codigo") String codigo,
                                       @Param("nombre") String nombre,
                                       @Param("numeroComprobante") String numeroComprobante,
                                       @Param("resumen") String resumen,
-                                      @Param("monto") Double monto,
-                                      @Param("fechaConclusion") LocalDate fechaConclusion,
-                                      @Param("vinculo") String vinculo);
+                                      @Param("monto") Double monto
+                                    );
 }
 
 

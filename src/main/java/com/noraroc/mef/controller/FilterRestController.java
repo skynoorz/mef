@@ -24,11 +24,10 @@ public class FilterRestController {
             @RequestParam(required = false) String nombre,
             @RequestParam(required = false) String numeroComprobante,
             @RequestParam(required = false) String resumen,
-            @RequestParam(required = false) Double monto,
-            @RequestParam(required = false) LocalDate fechaConclusion,
-            @RequestParam(required = false) String vinculo
+            @RequestParam(required = false) Double monto
+
     ) {
-        List<Tramite> tramites = tramiteRepository.buscarPorParametros(id, codigo, nombre, numeroComprobante, resumen, monto, fechaConclusion, vinculo);
+        List<Tramite> tramites = tramiteRepository.buscarPorParametros(id, codigo, nombre, numeroComprobante, resumen, monto);
         return tramites;
     }
 }

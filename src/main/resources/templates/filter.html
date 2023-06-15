@@ -88,8 +88,9 @@ form input[type="submit"] {
             <th><input type="text" id="filter-numero-comprobante" placeholder="NRO COMPROBANTE"></th>
             <th><input type="text" id="filter-resumen" placeholder="RESUMEN"></th>
             <th><input type="text" id="filter-monto" placeholder="MONTO"></th>
-            <th><input type="text" id="filter-fecha-conclusion" placeholder="FECHA DE CONCLUSION"></th>
-            <th><input type="text" id="filter-vinculo" placeholder="Filter by Code"></th>
+            <th></th>
+            <th></th>
+
         </tr>
         <tr>
             <th>ID</th>
@@ -127,10 +128,9 @@ $(document).ready(function() {
         var numero_comprobante = $("#filter-numero-comprobante").val();
         var resumen = $("#filter-resumen").val();
         var monto = $("#filter-monto").val();
-        var fecha_conclusion = $("#filter-fecha-conclusion").val();
-        var vinculo = $("#filter-vinculo").val();
 
-        $.get("/filter/tramite", { id: id, codigo: codigo ,nombre: nombre, numero_comprobante:numero_comprobante,resumen:resumen ,monto:monto,fecha_conclusion:fecha_conclusion,vinculo:vinculo}, function(data) {
+
+        $.get("/filter/tramite", { id: id, codigo: codigo ,nombre: nombre, numero_comprobante:numero_comprobante,resumen:resumen ,monto:monto}, function(data) {
             // Actualiza la tabla con los datos devueltos
             // Debes personalizar este código dependiendo de la estructura de los datos devueltos
             $("tbody").empty();
