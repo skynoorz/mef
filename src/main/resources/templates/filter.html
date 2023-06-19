@@ -77,7 +77,7 @@ form input[type="submit"] {
     <input type="file" name="file" />
     <input type="submit" value="Importar" />
 </form>
-
+<a th:href="@{/tramite/filter/form}">Filtro</a>
 <table>
     <thead>
     <tr>
@@ -102,16 +102,17 @@ form input[type="submit"] {
     </tr>
     </thead>
     <tbody>
-    <tr th:each="tramite : ${tramites}">
-        <td th:text="${tramite.id}"></td>
-        <td th:text="${tramite.codigo}"></td>
-        <td th:text="${tramite.nombre}"></td>
-        <td th:text="${tramite.numeroComprobante}"></td>
-        <td th:text="${tramite.resumen}"></td>
-        <td th:text="${tramite.monto}"></td>
-        <td th:text="${tramite.fechaConclusion}"></td>
-        <td><a th:href="${tramite.vinculoDocumentoDigital}" th:text="${tramite.vinculoDocumentoDigital}"></a></td>
-    </tr>
+        <tr></tr>
+        <tr th:each="tramite : ${tramites}">
+            <td th:text="${tramite.id}"></td>
+            <td th:text="${tramite.codigo}"></td>
+            <td th:text="${tramite.nombre}"></td>
+            <td th:text="${tramite.numeroComprobante}"></td>
+            <td th:text="${tramite.resumen}"></td>
+            <td th:text="${tramite.monto}"></td>
+            <td th:text="${tramite.fechaConclusion}"></td>
+            <td><a th:href="${tramite.vinculoDocumentoDigital}" th:text="${tramite.vinculoDocumentoDigital}"></a></td>
+        </tr>
     </tbody>
 </table>
 </body>

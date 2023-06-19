@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
   <head>
-    <title>Formulario de Trámite</title>
+    <title>Filtro de Trámite</title>
       <style>
           body {
               font-family: Arial, sans-serif;
@@ -65,8 +65,8 @@
   </head>
   <body>
   <a th:href="@{/logout}">Logout</a>
-    <form action="#" th:action="@{/create}" th:object="${tramite}" method="post">
-      <h2 style="text-align: center; color: #1c92d2;">REGISTRO DE DIGITALIZACIÓN</h2>
+    <form action="#" th:action="@{/tramite/filter}" th:object="${tramite}" method="post">
+      <h2 style="text-align: center; color: #1c92d2;">FILTRO</h2>
 
       <label for="codigo">Código:</label><br>
       <input type="text" id="codigo" th:field="*{codigo}"><br>
