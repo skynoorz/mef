@@ -1,4 +1,4 @@
-package com.noraroc.mef.entity;
+package com.noraroc.mef.model.entity;
 
 import lombok.Getter;
 import lombok.Setter;

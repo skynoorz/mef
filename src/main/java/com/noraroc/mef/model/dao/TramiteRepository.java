@@ -1,11 +1,10 @@
-package com.noraroc.mef.dao;
+package com.noraroc.mef.model.dao;
 
-import com.noraroc.mef.entity.Tramite;
+import com.noraroc.mef.model.entity.Tramite;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import java.time.LocalDate;
 import java.util.List;
 public interface TramiteRepository extends JpaRepository<Tramite, Long> {
 

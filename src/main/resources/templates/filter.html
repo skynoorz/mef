@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Filtro</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 
@@ -65,57 +65,51 @@ form input[type="submit"] {
         tr:nth-child(even) {
             background-color: #f2f2f2;
         }
-        </style>
-
-
-
-
+    </style>
 </head>
 <body>
-<form action="#" th:action="@{/import}" method="post" enctype="multipart/form-data">
+<form action="#" th:action="@{/tramite/import}" method="post" enctype="multipart/form-data">
     <h2>SUBIR TRAMITES</h2>
     <input type="file" name="file" />
     <input type="submit" value="Importar" />
 </form>
 <h2>BUSQUEDA DE TRAMITES</h2>
 <table>
-
-        <thead>
-        <tr>
-            <th><input type="text" id="filter-id" placeholder="ID"></th>
-            <th><input type="text" id="filter-codigo" placeholder="CODIGO"></th>
-            <th><input type="text" id="filter-nombre" placeholder="NOMBRE"></th>
-            <th><input type="text" id="filter-numero-comprobante" placeholder="NRO COMPROBANTE"></th>
-            <th><input type="text" id="filter-resumen" placeholder="RESUMEN"></th>
-            <th><input type="text" id="filter-monto" placeholder="MONTO"></th>
-            <th></th>
-            <th></th>
-
-        </tr>
-        <tr>
-            <th>ID</th>
-            <th>Código</th>
-            <th>Nombre</th>
-            <th>Número de Comprobante</th>
-            <th>Resumen</th>
-            <th>Monto</th>
-            <th>Fecha de Conclusión</th>
-            <th>Vínculo de Documento Digital</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="tramite : ${tramites}">
-            <td th:text="${tramite.id}"></td>
-            <td th:text="${tramite.codigo}"></td>
-            <td th:text="${tramite.nombre}"></td>
-            <td th:text="${tramite.numeroComprobante}"></td>
-            <td th:text="${tramite.resumen}"></td>
-            <td th:text="${tramite.monto}"></td>
-            <td th:text="${tramite.fechaConclusion}"></td>
-            <td><a th:href="${tramite.vinculoDocumentoDigital}" th:text="${tramite.vinculoDocumentoDigital}"></a></td>
-        </tr>
-        </tbody>
-    </table>
+    <thead>
+    <tr>
+        <th><input type="text" id="filter-id" placeholder="ID"></th>
+        <th><input type="text" id="filter-codigo" placeholder="CODIGO"></th>
+        <th><input type="text" id="filter-nombre" placeholder="NOMBRE"></th>
+        <th><input type="text" id="filter-numero-comprobante" placeholder="NRO COMPROBANTE"></th>
+        <th><input type="text" id="filter-resumen" placeholder="RESUMEN"></th>
+        <th><input type="text" id="filter-monto" placeholder="MONTO"></th>
+        <th></th>
+        <th></th>
+    </tr>
+    <tr>
+        <th>ID</th>
+        <th>Código</th>
+        <th>Nombre</th>
+        <th>Número de Comprobante</th>
+        <th>Resumen</th>
+        <th>Monto</th>
+        <th>Fecha de Conclusión</th>
+        <th>Vínculo de Documento Digital</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="tramite : ${tramites}">
+        <td th:text="${tramite.id}"></td>
+        <td th:text="${tramite.codigo}"></td>
+        <td th:text="${tramite.nombre}"></td>
+        <td th:text="${tramite.numeroComprobante}"></td>
+        <td th:text="${tramite.resumen}"></td>
+        <td th:text="${tramite.monto}"></td>
+        <td th:text="${tramite.fechaConclusion}"></td>
+        <td><a th:href="${tramite.vinculoDocumentoDigital}" th:text="${tramite.vinculoDocumentoDigital}"></a></td>
+    </tr>
+    </tbody>
+</table>
 </body>
 <script>
 $(document).ready(function() {
@@ -130,7 +124,7 @@ $(document).ready(function() {
         var monto = $("#filter-monto").val();
 
 
-        $.get("/filter/tramite", { id: id, codigo: codigo ,nombre: nombre, numero_comprobante:numero_comprobante,resumen:resumen ,monto:monto}, function(data) {
+        $.get("/tramite/find", { id: id, codigo: codigo ,nombre: nombre, numero_comprobante:numero_comprobante,resumen:resumen ,monto:monto}, function(data) {
             // Actualiza la tabla con los datos devueltos
             // Debes personalizar este código dependiendo de la estructura de los datos devueltos
             $("tbody").empty();
@@ -144,7 +138,6 @@ $(document).ready(function() {
                     "<td>" + tramite.monto + "</td>" +
                     "<td>" + tramite.fechaConclusion + "</td>" +
                     "<td>" + tramite.vinculoDocumentoDigital + "</td>" +
-
                     "</tr>";
                 $("tbody").append(row);
             });

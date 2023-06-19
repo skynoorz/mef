@@ -1,44 +1,26 @@
 package com.noraroc.mef.controller;
 
-import com.noraroc.mef.dao.TramiteRepository;
-import com.noraroc.mef.entity.Tramite;
+import com.noraroc.mef.model.entity.Tramite;
+import com.noraroc.mef.model.service.TramiteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @Controller
+@RequestMapping("/tramite/filter")
 public class FilterController {
 
     @Autowired
-    private TramiteRepository tramiteRepository;
+    private TramiteService tramiteService;
 
-    @GetMapping("/filter")
+    @GetMapping
     public String filterView(Model model) {
-        List<Tramite> tramites = tramiteRepository.findAll();
+        List<Tramite> tramites = tramiteService.findAll();
         model.addAttribute("tramites", tramites);
         return "filter";
     }
-//    @GetMapping("/filter/tramite")
-//    public List<Tramite> filterProducts(
-//            @RequestParam(required = false) Long id,
-//            @RequestParam(required = false) String codigo,
-//            @RequestParam(required = false) String nombre,
-//            @RequestParam(required = false) String numero_comprobante,
-//            @RequestParam(required = false) String resumen,
-//            @RequestParam(required = false) Double monto,
-//            @RequestParam(required = false) LocalDate fecha_conclusion,
-//            @RequestParam(required = false) String vinculo
-//    ) {
-//        List<Tramite> tramites = tramiteRepository.findByIdAndCodigoAndNombreAndNumeroComprobanteAndResumenAndMontoAndFechaConclusionAndVinculoDocumentoDigital(id, codigo,nombre,numero_comprobante,resumen,monto,fecha_conclusion,vinculo);
-//        return tramites;
-//    }
-
-
-
-
 }

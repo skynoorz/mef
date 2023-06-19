@@ -1,14 +1,12 @@
-package com.noraroc.mef.controller;
+package com.noraroc.mef.controller.rest;
 
-import com.noraroc.mef.dao.TramiteRepository;
-import com.noraroc.mef.entity.Tramite;
+import com.noraroc.mef.model.dao.TramiteRepository;
+import com.noraroc.mef.model.entity.Tramite;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -17,7 +15,7 @@ public class FilterRestController {
     @Autowired
     private TramiteRepository tramiteRepository;
 
-    @GetMapping("/filter/tramite")
+    @GetMapping("/tramite/find")
     public List<Tramite> filterProducts(
             @RequestParam(required = false) Long id,
             @RequestParam(required = false) String codigo,

@@ -1,4 +1,4 @@
-package com.noraroc.mef.configuration;
+package com.noraroc.mef.auth.configuration;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -49,9 +49,9 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
         }
 
         if (isAdmin) {
-            return "/filter";
+            return "/tramite/filter";
         } else if (isUser) {
-            return "/form";
+            return "/tramite/form";
         } else {
             throw new IllegalStateException();
         }
