@@ -12,7 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.validation.Valid;
+import javax.validation.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -70,6 +70,9 @@ public class TramiteController {
             NumberFormat format = NumberFormat.getInstance(Locale.forLanguageTag("es"));
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy");
 
+            ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+            Validator validator = factory.getValidator();
+
             for (CSVRecord csvRecord : csvRecords) {
                 try {
                     Tramite entity = new Tramite(
@@ -82,18 +85,24 @@ public class TramiteController {
                             csvRecord.get("vinculoDocumentoDigital")
                     );
 
-                    tramiteList.add(entity);
+                    // valida la entidad
+                    Set<ConstraintViolation<Tramite>> violations = validator.validate(entity);
+                    if (violations.isEmpty()) {
+                        tramiteList.add(entity);
+                    } else {
+                        // recorre las violaciones de las restricciones y añade los mensajes de error a recordsFallidos
+                        for (ConstraintViolation<Tramite> violation : violations) {
+                            recordsFallidos.put(csvRecord, violation.getMessage());
+                        }
+                    }
                 } catch (NumberFormatException e) {
-                    // Log the error and continue with the next row
                     recordsFallidos.put(csvRecord, "Error de formato de numero.");
-                    System.err.println("Invalid number format in row " + csvRecord.getRecordNumber() + ": " + e.getMessage());
                 } catch (DateTimeParseException e) {
-                    // Log the error and continue with the next row
                     recordsFallidos.put(csvRecord, "No se pudo converir la fecha.");
-                    System.err.println("Invalid date format in row " + csvRecord.getRecordNumber() + ": " + e.getMessage());
                 } catch (ParseException e) {
                     recordsFallidos.put(csvRecord, "Error al convertir un valor.");
-                    System.err.println("Invalid date format in row " + csvRecord.getRecordNumber() + ": " + e.getMessage());
+                } catch (ConstraintViolationException e) {
+                    recordsFallidos.put(csvRecord, e.getMessage());
                 }
             }
 

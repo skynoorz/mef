@@ -26,7 +26,7 @@ public class HomeController {
 
         // En caso de que el usuario no tenga rol, se puede redirigir a otra página
         else {
-            return "redirect:/error";
+            return "redirect:/tramite/filter/form";
         }
     }
 }

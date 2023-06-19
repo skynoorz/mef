@@ -40,7 +40,7 @@ public class Tramite {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate fechaConclusion;
 
-    @NotEmpty(message = "El vinculo del documento digital es obligatorio")
+    // @NotEmpty(message = "El vinculo del documento digital es obligatorio")
     @URL(message = "Ingrese una direccion valida ej: 'http://drive.google.com'")
     private String vinculoDocumentoDigital;
 
