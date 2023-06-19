@@ -8,9 +8,11 @@ import org.apache.commons.csv.CSVRecord;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.validation.Valid;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -35,11 +37,16 @@ public class TramiteController {
     }
 
     @PostMapping("/form")
-    public String submitTramite(@ModelAttribute Tramite tramite, Model model) {
+    public String submitTramite(@ModelAttribute @Valid Tramite tramite, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            return "formulario";
+        }
+
         Tramite newTramite = tramiteService.save(tramite);
         model.addAttribute("new", newTramite);
         return "success";
     }
+
 
     @PostMapping("/import")
     public String importCsvFile(@RequestParam("file") MultipartFile file, Model model) {

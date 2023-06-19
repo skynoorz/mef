@@ -10,25 +10,33 @@
   <h2 style="text-align: center; color: #1c92d2;">REGISTRO DE DIGITALIZACIÓN</h2>
 
   <label for="codigo">Código:</label><br>
-  <input type="text" id="codigo" th:field="*{codigo}"><br>
+  <input type="text" id="codigo" th:field="*{codigo}">
+  <span style="color: red;" th:if="${#fields.hasErrors('codigo')}" th:errors="*{codigo}">Error de codigo</span>
+  <br>
 
   <label for="nombre">Nombre:</label><br>
   <input type="text" id="nombre" th:field="*{nombre}"><br>
+  <span style="color: red;" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}">Error de nombre</span>
 
   <label for="comprobante">Número de Comprobante:</label><br>
   <input type="text" id="comprobante" th:field="*{numeroComprobante}"><br>
+  <span style="color: red;" th:if="${#fields.hasErrors('numeroComprobante')}" th:errors="*{numeroComprobante}">Error de comprobante</span>
 
   <label for="resumen">Resumen:</label><br>
   <textarea id="resumen" th:field="*{resumen}"></textarea><br>
+  <span style="color: red;" th:if="${#fields.hasErrors('resumen')}" th:errors="*{resumen}">Error de resumen</span>
 
   <label for="monto">Monto:</label><br>
   <input type="number" id="monto" th:field="*{monto}"><br>
+  <span style="color: red;" th:if="${#fields.hasErrors('monto')}" th:errors="*{monto}">Error de monto</span>
 
   <label for="fechaConclusion">Fecha de Conclusión del Trámite:</label><br>
   <input type="date" id="fechaConclusion" th:field="*{fechaConclusion}"><br>
+  <span style="color: red;" th:if="${#fields.hasErrors('fechaConclusion')}" th:errors="*{fechaConclusion}">Error de Fecha Conclusion</span>
 
   <label for="documentoDigital">Vínculo al Documento Digital:</label><br>
   <input type="text" id="documentoDigital" th:field="*{vinculoDocumentoDigital}"><br>
+  <span style="color: red;" th:if="${#fields.hasErrors('vinculoDocumentoDigital')}" th:errors="*{vinculoDocumentoDigital}">Error de Documento Digital</span>
 
   <input type="submit" value="Enviar">
 </form>
