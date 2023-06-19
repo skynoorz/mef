@@ -23,7 +23,7 @@ public class FilterController {
     public String filterView(Model model) {
         List<Tramite> tramites = tramiteService.findAll();
         model.addAttribute("tramites", tramites);
-        return "filter";
+        return "tramites";
     }
 
     @GetMapping("/form")
@@ -36,6 +36,6 @@ public class FilterController {
     public String procesarFormulario(@ModelAttribute Tramite tramite, Model model) {
         List<Tramite> tramites = tramiteService.search(tramite);
         model.addAttribute("tramites", tramites);
-        return "filter";
+        return "tramites";
     }
 }
