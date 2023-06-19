@@ -68,12 +68,16 @@ form input[type="submit"] {
     </style>
 </head>
 <body>
+<div>
+    <h2>BUSQUEDA DE TRAMITES</h2>
+    <a th:href="@{/logout}">Logout</a>
+</div>
 <form action="#" th:action="@{/tramite/import}" method="post" enctype="multipart/form-data">
     <h2>SUBIR TRAMITES</h2>
     <input type="file" name="file" />
     <input type="submit" value="Importar" />
 </form>
-<h2>BUSQUEDA DE TRAMITES</h2>
+
 <table>
     <thead>
     <tr>
