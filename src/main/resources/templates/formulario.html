@@ -3,34 +3,77 @@
 <head>
   <title>Formulario de Trámite</title>
   <link rel="stylesheet" th:href="@{/css/formulario.css}">
+  <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+
 </head>
 <body>
-<a th:href="@{/logout}">Logout</a>
-<form action="#" th:action="@{/tramite/form}" th:object="${tramite}" method="post">
-  <h2 style="text-align: center; color: #1c92d2;">REGISTRO DE DIGITALIZACIÓN</h2>
+<header class="header">
+  <div class="container-fluid">
+    <div class="row justify-content-center align-items-center position-relative">
+      <div class="col-md-4">
+        <div class="logo">
+          <img th:src="@{/images.jpg}" alt="Logo del sistema">
+        </div>
+      </div>
+      <div class="col-md-8 align-right">
+        <a th:href="@{/logout}" class="btn btn-primary float-end">Salir</a>
 
-  <label for="codigo">Código:</label><br>
-  <input type="text" id="codigo" th:field="*{codigo}"><br>
+      </div>
+    </div>
+  </div>
+</header>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <form action="#" th:action="@{/tramite/form}" th:object="${tramite}" method="post" class="p-4 border rounded bg-light">
+        <h2 class="text-center text-primary mb-4">REGISTRO DE DIGITALIZACIÓN</h2>
 
-  <label for="nombre">Nombre:</label><br>
-  <input type="text" id="nombre" th:field="*{nombre}"><br>
+        <div class="mb-3">
+          <label for="codigo" class="form-label">Código:</label>
+          <input type="text" id="codigo" class="form-control" th:field="*{codigo}">
+        </div>
 
-  <label for="comprobante">Número de Comprobante:</label><br>
-  <input type="text" id="comprobante" th:field="*{numeroComprobante}"><br>
+        <div class="mb-3">
+          <label for="nombre" class="form-label">Nombre:</label>
+          <input type="text" id="nombre" class="form-control" th:field="*{nombre}">
+        </div>
 
-  <label for="resumen">Resumen:</label><br>
-  <textarea id="resumen" th:field="*{resumen}"></textarea><br>
+        <div class="mb-3">
+          <label for="comprobante" class="form-label">Número de Comprobante:</label>
+          <input type="text" id="comprobante" class="form-control" th:field="*{numeroComprobante}">
+        </div>
 
-  <label for="monto">Monto:</label><br>
-  <input type="number" id="monto" th:field="*{monto}"><br>
+        <div class="mb-3">
+          <label for="resumen" class="form-label">Resumen:</label>
+          <textarea id="resumen" class="form-control" th:field="*{resumen}"></textarea>
+        </div>
 
-  <label for="fechaConclusion">Fecha de Conclusión del Trámite:</label><br>
-  <input type="date" id="fechaConclusion" th:field="*{fechaConclusion}"><br>
+        <div class="mb-3">
+          <label for="monto" class="form-label">Monto:</label>
+          <input type="number" id="monto" class="form-control" th:field="*{monto}">
+        </div>
 
-  <label for="documentoDigital">Vínculo al Documento Digital:</label><br>
-  <input type="text" id="documentoDigital" th:field="*{vinculoDocumentoDigital}"><br>
+        <div class="mb-3">
+          <label for="fechaConclusion" class="form-label">Fecha de Conclusión del Trámite:</label>
+          <input type="date" id="fechaConclusion" class="form-control" th:field="*{fechaConclusion}">
+        </div>
 
-  <input type="submit" value="Enviar">
-</form>
+        <div class="mb-3">
+          <label for="documentoDigital" class="form-label">Vínculo al Documento Digital:</label>
+          <input type="text" id="documentoDigital" class="form-control" th:field="*{vinculoDocumentoDigital}">
+        </div>
+
+        <input type="submit" value="Enviar" class="btn btn-primary">
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<footer class="bg-primary text-light text-center py-3">
+  <div class="container">
+    <span>&copy; 2023. Todos los derechos reservados.</span>
+  </div>
+</footer>
 </body>
 </html>
