@@ -4,75 +4,14 @@
     <meta charset="UTF-8">
     <title>Filtro</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-
-    <style>
-
-
-form {
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
-    align:center;
-}
-
-form h2 {
-    color: #1c92d2;
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-form input[type="file"] {
-    margin-bottom: 20px;
-}
-
-form input[type="submit"] {
-    background-color: #1c92d2;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    text-transform: uppercase;
-}
-           input[type=file] {
-            width: 90%;
-            margin-bottom: 10px;
-        }
-
-        table {
-            width: 100%;
-            max-width: 600px;
-            margin: 30px auto;
-            border-collapse: collapse;
-        }
-
-        table, th, td {
-            border: 1px solid #ccc;
-        }
-
-        th, td {
-            padding: 15px;
-            text-align: left;
-        }
-
-        th {
-            background-color: #1c92d2;
-            color: white;
-        }
-
-        tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-    </style>
+    <link rel="stylesheet" th:href="@{/css/tramites.css}">
 </head>
 <body>
-<div>
+<div >
     <h2>BUSQUEDA DE TRAMITES</h2>
-    <a th:href="@{/logout}">Logout</a>
+    <a th:if="${user != 'guest'}" th:href="@{/logout}">Logout</a>
 </div>
-<form action="#" th:action="@{/tramite/import}" method="post" enctype="multipart/form-data">
+<form th:if="${user != 'guest'}" action="#" th:action="@{/tramite/import}" method="post" enctype="multipart/form-data">
     <h2>SUBIR TRAMITES</h2>
     <input type="file" name="file" />
     <input type="submit" value="Importar" />
@@ -116,39 +55,6 @@ form input[type="submit"] {
     </tbody>
 </table>
 </body>
-<script>
-$(document).ready(function() {
-
-    $("input[id^='filter-']").on('input', function() {
-
-        var id = $("#filter-id").val();
-        var codigo = $("#filter-codigo").val();
-        var nombre = $("#filter-nombre").val();
-        var numero_comprobante = $("#filter-numero-comprobante").val();
-        var resumen = $("#filter-resumen").val();
-        var monto = $("#filter-monto").val();
-
-
-        $.get("/tramite/find", { id: id, codigo: codigo ,nombre: nombre, numero_comprobante:numero_comprobante,resumen:resumen ,monto:monto}, function(data) {
-            // Actualiza la tabla con los datos devueltos
-            // Debes personalizar este código dependiendo de la estructura de los datos devueltos
-            $("tbody").empty();
-            data.forEach(function(tramite) {
-                var row = "<tr>" +
-                    "<td>" + tramite.id + "</td>" +
-                    "<td>" + tramite.codigo + "</td>" +
-                    "<td>" + tramite.nombre + "</td>" +
-                    "<td>" + tramite.numeroComprobante + "</td>" +
-                    "<td>" + tramite.resumen + "</td>" +
-                    "<td>" + tramite.monto + "</td>" +
-                    "<td>" + tramite.fechaConclusion + "</td>" +
-                    "<td>" + tramite.vinculoDocumentoDigital + "</td>" +
-                    "</tr>";
-                $("tbody").append(row);
-            });
-        });
-    });
-});
-</script>
+<script th:src="@{/js/tramites.js}"></script>
 </html>
 

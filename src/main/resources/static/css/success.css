@@ -1,0 +1,31 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f3f3f3;
+}
+.success-container {
+    text-align: center;
+    padding: 10% 0;
+}
+.success-container h1 {
+    font-size: 50px;
+    color: #555;
+}
+.success-container p {
+    color: #666;
+    font-size: 20px;
+}
+.success-container a {
+    display: inline-block;
+    color: #fff;
+    background-color: #28a745; /* Cambiado a un tono de verde para indicar éxito */
+    padding: 12px 24px;
+    margin-top: 25px;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+.success-container a:hover {
+    background-color: #218838; /* Cambiado a un tono de verde más oscuro para indicar éxito */
+}

@@ -2,45 +2,13 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Error Interno del Servidor</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f3f3f3;
-        }
-        .error-container {
-            text-align: center;
-            padding: 10% 0;
-        }
-        .error-container h1 {
-            font-size: 50px;
-            color: #555;
-        }
-        .error-container p {
-            color: #666;
-            font-size: 20px;
-        }
-        .error-container a {
-            display: inline-block;
-            color: #fff;
-            background-color: #007BFF;
-            padding: 12px 24px;
-            margin-top: 25px;
-            text-decoration: none;
-            border-radius: 4px;
-            transition: background-color 0.3s ease;
-        }
-        .error-container a:hover {
-            background-color: #0056b3;
-        }
-    </style>
+    <link rel="stylesheet" th:href="@{/css/error.css}">
 </head>
 <body>
 <div class="error-container">
     <h1>Error 500</h1>
     <p>¡Ups! Ha ocurrido un error interno en el servidor. Por favor, intenta de nuevo más tarde.</p>
-    <a th:href="@{/filter}">Regresar a la página principal</a>
+    <a th:href="@{/}">Regresar a la página principal</a>
 </div>
 </body>
 </html>
