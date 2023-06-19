@@ -1,7 +1,7 @@
-package com.noraroc.mef.service;
+package com.noraroc.mef.auth.service;
 
-import com.noraroc.mef.dao.UserRepository;
-import com.noraroc.mef.entity.User;
+import com.noraroc.mef.model.dao.UserRepository;
+import com.noraroc.mef.model.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

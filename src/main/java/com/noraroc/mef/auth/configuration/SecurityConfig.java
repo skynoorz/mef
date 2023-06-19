@@ -1,4 +1,4 @@
-package com.noraroc.mef.configuration;
+package com.noraroc.mef.auth.configuration;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -26,9 +26,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/filter").hasRole("ADMIN")
-                .antMatchers("/filter/tramite/**").hasRole("ADMIN")
-                .antMatchers("/form").hasRole("USER")
+                .antMatchers("/tramite/filter").hasRole("ADMIN")
+                .antMatchers("/tramite/filter/tramite/**").hasRole("ADMIN")
+                .antMatchers("/tramite/form").hasRole("USER")
                 .anyRequest().authenticated()
                 .and().formLogin().successHandler(new CustomAuthenticationSuccessHandler())
                 .and().csrf().disable();

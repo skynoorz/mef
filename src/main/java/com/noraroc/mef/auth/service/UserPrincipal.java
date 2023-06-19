@@ -1,6 +1,6 @@
-package com.noraroc.mef.service;
+package com.noraroc.mef.auth.service;
 
-import com.noraroc.mef.entity.User;
+import com.noraroc.mef.model.entity.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

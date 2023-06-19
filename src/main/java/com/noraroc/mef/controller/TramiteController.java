@@ -1,17 +1,14 @@
 package com.noraroc.mef.controller;
 
-import com.noraroc.mef.dao.TramiteRepository;
-import com.noraroc.mef.entity.Tramite;
+import com.noraroc.mef.model.entity.Tramite;
+import com.noraroc.mef.model.service.TramiteService;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.BufferedReader;
@@ -27,10 +24,11 @@ import java.util.List;
 import java.util.Locale;
 
 @Controller
+@RequestMapping("/tramite")
 public class TramiteController {
 
     @Autowired
-    private TramiteRepository tramiteRepository;
+    private TramiteService tramiteService;
 
     @GetMapping("/form")
     public String formularioTramite(Model model) {
@@ -40,13 +38,12 @@ public class TramiteController {
 
     @PostMapping("/form")
     public String submitTramite(@ModelAttribute Tramite tramite) {
-        tramiteRepository.save(tramite);
+        Tramite newTramite = tramiteService.save(tramite);
         return "success";
     }
 
     @PostMapping("/import")
     public String importCsvFile(@RequestParam("file") MultipartFile file) {
-        // TODO
 
         // validate file
         if (file.isEmpty()) {
@@ -90,7 +87,7 @@ public class TramiteController {
             }
 
             // save entities in the database
-            tramiteRepository.saveAll(tramiteList);
+            tramiteService.saveAll(tramiteList);
 
             return "success";
         } catch (IOException e) {

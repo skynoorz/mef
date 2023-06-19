@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Filtro de Trámite</title>
+      <style>
+          body {
+              font-family: Arial, sans-serif;
+              margin: 0;
+              padding: 0;
+              height: 100vh;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              background: linear-gradient(to right, #1c92d2, #f2fcfe);
+          }
+
+          form {
+              width: 100%;
+              max-width: 600px;
+              padding: 30px;
+              background-color: white;
+              border-radius: 8px;
+              box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.15);
+          }
+
+          label {
+              font-weight: bold;
+              display: block;
+              margin: 15px 0 5px 0;
+          }
+
+          input[type=text],
+          input[type=number],
+          input[type=date],
+          textarea {
+              width: 100%;
+              padding: 10px;
+              border-radius: 4px;
+              border: 1px solid #ccc;
+              box-sizing: border-box;
+              margin-bottom: 20px;
+              font-size: 16px;
+              font-family: Arial, sans-serif;
+          }
+
+          input[type=submit] {
+              width: 100%;
+              background-color: #1c92d2;
+              color: white;
+              padding: 15px;
+              border: none;
+              border-radius: 4px;
+              cursor: pointer;
+              font-size: 18px;
+          }
+
+          input[type=submit]:hover {
+              background-color: #1488cc;
+              transition: background-color 0.3s ease;
+          }
+      </style>
+
+
+
+  </head>
+  <body>
+  <a th:href="@{/logout}">Logout</a>
+    <form action="#" th:action="@{/tramite/filter}" th:object="${tramite}" method="post">
+      <h2 style="text-align: center; color: #1c92d2;">FILTRO</h2>
+
+      <label for="codigo">Código:</label><br>
+      <input type="text" id="codigo" th:field="*{codigo}"><br>
+
+      <label for="nombre">Nombre:</label><br>
+      <input type="text" id="nombre" th:field="*{nombre}"><br>
+
+      <label for="comprobante">Número de Comprobante:</label><br>
+      <input type="text" id="comprobante" th:field="*{numeroComprobante}"><br>
+
+      <label for="resumen">Resumen:</label><br>
+      <textarea id="resumen" th:field="*{resumen}"></textarea><br>
+
+      <label for="monto">Monto:</label><br>
+      <input type="number" id="monto" th:field="*{monto}"><br>
+
+      <label for="fechaConclusion">Fecha de Conclusión del Trámite:</label><br>
+      <input type="date" id="fechaConclusion" th:field="*{fechaConclusion}"><br>
+
+      <label for="documentoDigital">Vínculo al Documento Digital:</label><br>
+      <input type="text" id="documentoDigital" th:field="*{vinculoDocumentoDigital}"><br>
+
+      <input type="submit" value="Enviar">
+    </form>
+  </body>
+</html>
