@@ -2,6 +2,7 @@ package com.noraroc.mef.model.entity;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.validator.constraints.URL;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Entity;
@@ -40,6 +41,7 @@ public class Tramite {
     private LocalDate fechaConclusion;
 
     @NotEmpty(message = "El vinculo del documento digital es obligatorio")
+    @URL(message = "Ingrese una direccion valida ej: 'http://drive.google.com'")
     private String vinculoDocumentoDigital;
 
     public Tramite(Long id, String codigo, String nombre, String numeroComprobante, String resumen, Double monto, LocalDate fechaConclusion, String vinculoDocumentoDigital) {
