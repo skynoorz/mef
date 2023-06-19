@@ -2,13 +2,64 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Registro Satisfactorio</title>
-    <link rel="stylesheet" th:href="@{/css/success.css}">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
 </head>
-<body>
-<div class="success-container">
-    <h1>¡Registro Exitoso!</h1>
-    <p>Tu registro ha sido completado con éxito. Gracias por unirte a nosotros.</p>
-    <a th:href="@{/}">Ir a la página principal</a>
+<body class="bg-light">
+<div class="container py-5">
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <div class="card">
+                <div class="card-header bg-success text-white">
+                    <h1>¡Registro Exitoso!</h1>
+                </div>
+                <div class="card-body">
+                    <p class="lead">Tu registro ha sido completado con éxito. Gracias por unirte a nosotros.</p>
+                    <table class="table table-striped">
+                        <tbody>
+                        <tr>
+                            <th>ID</th>
+                            <td th:utext="${tramite.id != null} ? ${tramite.id} : 'vacio'"></td>
+                        </tr>
+                        <tr>
+                            <th>Código</th>
+                            <td th:utext="${tramite.codigo != null} ? ${tramite.codigo} : 'vacio'"></td>
+                        </tr>
+                        <tr>
+                            <th>Nombre</th>
+                            <td th:utext="${tramite.nombre != null} ? ${tramite.nombre} : 'vacio'"></td>
+                        </tr>
+                        <tr>
+                            <th>Número de Comprobante</th>
+                            <td th:utext="${tramite.numeroComprobante != null} ? ${tramite.numeroComprobante} : 'vacio'"></td>
+                        </tr>
+                        <tr>
+                            <th>Resumen</th>
+                            <td th:utext="${tramite.resumen != null} ? ${tramite.resumen} : 'vacio'"></td>
+                        </tr>
+                        <tr>
+                            <th>Monto</th>
+                            <td th:utext="${tramite.monto != null} ? ${tramite.monto} : 'vacio'"></td>
+                        </tr>
+                        <tr>
+                            <th>Fecha de Conclusión</th>
+                            <td th:utext="${tramite.fechaConclusion != null} ? ${tramite.fechaConclusion} : 'vacio'"></td>
+                        </tr>
+                        <tr>
+                            <th>Vínculo al Documento Digital</th>
+                            <td>
+                                <a th:href="${tramite.vinculoDocumentoDigital != null} ? ${tramite.vinculoDocumentoDigital} : '#'"
+                                   th:text="${tramite.vinculoDocumentoDigital != null} ? ${tramite.vinculoDocumentoDigital} : 'vacio'">
+                                </a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <a class="btn btn-primary mt-3" th:href="@{/}">Ir a la página principal</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 </body>
 </html>
+

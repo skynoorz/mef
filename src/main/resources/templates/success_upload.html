@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Registro Completado</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+</head>
+<body class="bg-light">
+<div class="container py-5">
+    <div class="row">
+        <div class="col-lg-10 mx-auto">
+            <div class="card">
+                <div class="card-header bg-success text-white">
+                    <h1>Registro Completado</h1>
+                </div>
+                <div class="card-body">
+                    <p class="lead" th:unless="${#maps.isEmpty(errores)}">Se encontraron los siguientes errores durante el proceso de registro.</p>
+                    <p class="lead" th:if="${#maps.isEmpty(errores)}">No se encontraron errores en el registro.</p>
+                    <table class="table table-striped" th:unless="${#maps.isEmpty(errores)}">
+                        <thead>
+                        <tr>
+                            <th># Registro</th>
+                            <th>Error</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="error : ${errores}">
+                            <td th:text="${error.key}"></td>
+                            <td th:text="${error.value}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <a class="btn btn-primary mt-3" th:href="@{/}">Volver a la página principal</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
