@@ -1,36 +1,73 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-  <head>
+<head>
     <title>Filtro de Trámite</title>
     <link rel="stylesheet" th:href="@{/css/form_filter.css}">
-  </head>
-  <body>
-  <a th:href="@{/logout}">Logout</a>
-    <form action="#" th:action="@{/tramite/filter}" th:object="${tramite}" method="post">
-      <h2 style="text-align: center; color: #1c92d2;">FILTRO</h2>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
 
-      <label for="codigo">Código:</label><br>
-      <input type="text" id="codigo" th:field="*{codigo}"><br>
+</head>
+<body>
+<header class="header">
+    <div class="container-fluid">
+        <div class="row justify-content-center align-items-center position-relative">
+            <div class="col-md-4">
+                <div class="logo">
+                    <img th:src="@{/images.jpg}" alt="Logo del sistema">
+                </div>
+            </div>
+            <div class="col-md-8 align-right">
+                <a th:href="@{/logout}" class="btn btn-primary float-end">Salir</a>
 
-      <label for="nombre">Nombre:</label><br>
-      <input type="text" id="nombre" th:field="*{nombre}"><br>
+            </div>
+        </div>
+    </div>
+</header>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <form action="#" th:action="@{/tramite/filter}" th:object="${tramite}" method="post" class="p-4 border rounded bg-light">
+                <h2 class="text-center text-primary">BUSQUEDA DE REGISTROS</h2>
+                <div class="mb-3">
 
-      <label for="comprobante">Número de Comprobante:</label><br>
-      <input type="text" id="comprobante" th:field="*{numeroComprobante}"><br>
+                    <label for="codigo" class="form-label">Código:</label><br>
+                    <input type="text" id="codigo" class="form-control" th:field="*{codigo}"><br>
+                </div>
+                <div class="mb-3">
 
-      <label for="resumen">Resumen:</label><br>
-      <textarea id="resumen" th:field="*{resumen}"></textarea><br>
+                    <label for="nombre" class="form-label">Nombre:</label><br>
+                    <input type="text" id="nombre" class="form-control" th:field="*{nombre}"><br>
+                </div>
+                <div class="mb-3">
+                    <label for="comprobante" class="form-label">Número de Comprobante:</label><br>
+                    <input type="text" id="comprobante"  class="form-control" th:field="*{numeroComprobante}"><br>
+                </div>
+                <div class="mb-3">
+                    <label for="resumen" class="form-label">Resumen:</label><br>
+                    <textarea id="resumen" class="form-control" th:field="*{resumen}"></textarea><br>
+                </div>
+                <div class="mb-3">
+                    <label for="monto" class="form-label">Monto:</label><br>
+                    <input type="number" class="form-control" id="monto" th:field="*{monto}"><br>
+                </div>
+                <div class="mb-3">
+                    <label for="fechaConclusion" class="form-label">Fecha de Conclusión del Trámite:</label><br>
+                    <input type="date" class="form-control" id="fechaConclusion" th:field="*{fechaConclusion}"><br>
+                </div>
+                <div class="mb-3">
+                    <label for="documentoDigital" class="form-label">Vínculo al Documento Digital:</label><br>
+                    <input type="text" class="form-control" id="documentoDigital" th:field="*{vinculoDocumentoDigital}"><br>
+                </div>
 
-      <label for="monto">Monto:</label><br>
-      <input type="number" id="monto" th:field="*{monto}"><br>
+                <input type="submit" value="Buscar" class="btn btn-primary">
 
-      <label for="fechaConclusion">Fecha de Conclusión del Trámite:</label><br>
-      <input type="date" id="fechaConclusion" th:field="*{fechaConclusion}"><br>
-
-      <label for="documentoDigital">Vínculo al Documento Digital:</label><br>
-      <input type="text" id="documentoDigital" th:field="*{vinculoDocumentoDigital}"><br>
-
-      <input type="submit" value="Enviar">
-    </form>
-  </body>
+            </form>
+        </div>
+    </div>
+</div>
+<footer class="bg-primary text-light text-center py-3">
+    <div class="container">
+        <span>&copy; 2023. Todos los derechos reservados.</span>
+    </div>
+</footer>
+</body>
 </html>
