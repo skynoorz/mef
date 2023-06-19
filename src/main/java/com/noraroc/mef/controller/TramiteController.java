@@ -19,9 +19,7 @@ import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 
 @Controller
 @RequestMapping("/tramite")
@@ -37,13 +35,14 @@ public class TramiteController {
     }
 
     @PostMapping("/form")
-    public String submitTramite(@ModelAttribute Tramite tramite) {
+    public String submitTramite(@ModelAttribute Tramite tramite, Model model) {
         Tramite newTramite = tramiteService.save(tramite);
+        model.addAttribute("new", newTramite);
         return "success";
     }
 
     @PostMapping("/import")
-    public String importCsvFile(@RequestParam("file") MultipartFile file) {
+    public String importCsvFile(@RequestParam("file") MultipartFile file, Model model) {
 
         // validate file
         if (file.isEmpty()) {
@@ -56,6 +55,8 @@ public class TramiteController {
                              .withIgnoreHeaderCase()
                              .withTrim());) {
 
+//            List<CSVRecord> recordsFallidos= new ArrayList<>();
+            Map<CSVRecord, String> recordsFallidos = new HashMap<>();
             List<Tramite> tramiteList = new ArrayList<Tramite>();
 
             Iterable<CSVRecord> csvRecords = csvParser.getRecords();
@@ -77,19 +78,23 @@ public class TramiteController {
                     tramiteList.add(entity);
                 } catch (NumberFormatException e) {
                     // Log the error and continue with the next row
+                    recordsFallidos.put(csvRecord, "Error de formato de numero.");
                     System.err.println("Invalid number format in row " + csvRecord.getRecordNumber() + ": " + e.getMessage());
                 } catch (DateTimeParseException e) {
                     // Log the error and continue with the next row
+                    recordsFallidos.put(csvRecord, "No se pudo converir la fecha.");
                     System.err.println("Invalid date format in row " + csvRecord.getRecordNumber() + ": " + e.getMessage());
                 } catch (ParseException e) {
+                    recordsFallidos.put(csvRecord, "Error al convertir un valor.");
                     System.err.println("Invalid date format in row " + csvRecord.getRecordNumber() + ": " + e.getMessage());
                 }
             }
 
             // save entities in the database
+            model.addAttribute("errores", recordsFallidos);
             tramiteService.saveAll(tramiteList);
 
-            return "success";
+            return "success_upload";
         } catch (IOException e) {
             return "error";
         }
