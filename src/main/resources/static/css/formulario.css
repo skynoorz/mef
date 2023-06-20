@@ -6,7 +6,6 @@ body {
 
     align-items: center;
     justify-content: center;
-    background: linear-gradient(to right, #1c92d2, #f2fcfe);
 }
 .header {
       background-color: white;
@@ -19,6 +18,10 @@ body {
     .logo img {
       max-width: 100%;
       height: auto;
+    }
+    footer{    background-color: #797a7d;
+               color: white;
+               padding: 20px;
     }
     /*
 form {

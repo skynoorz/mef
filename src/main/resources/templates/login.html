@@ -11,13 +11,17 @@
             padding: 20px;
             margin-top: 15%;
         }
+        footer{    background-color: #797a7d;
+               color: white;
+               padding: 20px;
+    }
     </style>
 </head>
 <body style="background: linear-gradient(to right, #1c92d2, #f2fcfe);">
-<div class="container">
+<div class="container" >
     <div class="row justify-content-center">
         <div class="col-md-4">
-            <h1 class="text-center mt-5 pb-2">Iniciar Sesión</h1>
+            <h1 class="text-center mt-5 pb-2">Sistema de Archivo: Formulario C-31</h1>
 
             <!-- Mensaje de error -->
             <div style="margin-bottom:0" th:if="${param.error}" class="alert alert-danger mb-0" role="alert">
@@ -42,5 +46,23 @@
         </div>
     </div>
 </div>
+<footer >
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h5>Archivo Central Ministerio de Economia y Finanzas Publicas</h5>
+                <ul class="list-unstyled">
+                    <li>Dirección: Calle Bolívar, Edificio Bolívar N°688</li>
+                    <li>Esquina Bozo Edificio Ex AADAA (Plaza Alonzo de Mendoza)</li>
+                    <li>Teléfono: (591-2) 218333 - Internos: 4051-4055-4091-4092</li>
+                    <li>Email: fernando.chuquimia@economiayfinanzas.gob.bo</li>
+                </ul>
+            </div>
+
+        </div>
+        <hr>
+        <p class="text-center">© 2023 Todos los derechos reservados</p>
+    </div>
+</footer>
 <script th:src="@{/js/bootstrap.bundle.min.js}"></script></body>
 </html>

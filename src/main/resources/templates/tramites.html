@@ -4,28 +4,79 @@
     <meta charset="UTF-8">
     <title>Filtro</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
     <link rel="stylesheet" th:href="@{/css/tramites.css}">
 </head>
 <body>
+<header class="header">
+    <div class="container-fluid">
+        <div class="row justify-content-center align-items-center position-relative">
+            <div class="col-md-4">
+                <div class="logo">
+                    <img th:src="@{/images/images.jpg}" alt="Logo del sistema">
+                </div>
+            </div>
+            <div class="col-md-8 align-right">
+                <a th:if="${user != 'guest'}" th:href="@{/logout}" class="btn btn-primary float-end">Salir</a>
+
+            </div>
+        </div>
+    </div>
+</header>
 <div >
-    <h2>BUSQUEDA DE TRAMITES</h2>
-    <a th:if="${user != 'guest'}" th:href="@{/logout}">Logout</a>
+    <h1 class="text-center mt-5 pb-2">Sistema de Archivo: Formulario C-31</h1>
+
+    <div class="text-center">
+        <!-- Botón "Búsqueda" -->
+        <a th:href="@{/tramite/filter/form}" class="btn btn-primary">BÚSQUEDA</a>
+
+        <!-- Botón "SUBIR TRÁMITES" -->
+        <button th:if="${user != 'guest'}" type="button" class="btn btn-primary" data-toggle="modal" data-target="#importModal">
+            SUBIR TRÁMITES
+        </button>
+    </div>
+
+
+    <div class="modal fade" id="importModal" tabindex="-1" role="dialog" aria-labelledby="importModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h5 class="modal-title" id="importModalLabel">SUBIR TRÁMITES</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form th:if="${user != 'guest'}" action="#" th:action="@{/tramite/import}" method="post" enctype="multipart/form-data" id="importForm">
+                        <input type="file" name="file" class="form-control-file" />
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <input type="submit" class="btn btn-primary" value="Importar" form="importForm" />
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<form th:if="${user != 'guest'}" action="#" th:action="@{/tramite/import}" method="post" enctype="multipart/form-data">
-    <h2>SUBIR TRAMITES</h2>
-    <input type="file" name="file" />
-    <input type="submit" value="Importar" />
-</form>
-<a th:href="@{/tramite/filter/form}">Filtro</a>
-<table>
+
+    <!--<form th:if="${user != 'guest'}" action="#" th:action="@{/tramite/import}" method="post" enctype="multipart/form-data">-->
+<!--    <h2>SUBIR TRAMITES</h2>-->
+<!--    <input type="file" name="file" />-->
+<!--    <input type="submit" value="Importar" />-->
+<!--</form>-->
+
+<table class="table table-striped">
     <thead>
     <tr>
-        <th><input type="text" id="filter-id" placeholder="ID"></th>
-        <th><input type="text" id="filter-codigo" placeholder="CODIGO"></th>
-        <th><input type="text" id="filter-nombre" placeholder="NOMBRE"></th>
-        <th><input type="text" id="filter-numero-comprobante" placeholder="NRO COMPROBANTE"></th>
-        <th><input type="text" id="filter-resumen" placeholder="RESUMEN"></th>
-        <th><input type="text" id="filter-monto" placeholder="MONTO"></th>
+        <th><input type="text" id="filter-id" class="form-control" placeholder="ID"></th>
+        <th><input type="text" id="filter-codigo" class="form-control" placeholder="CÓDIGO"></th>
+        <th><input type="text" id="filter-nombre" class="form-control" placeholder="NOMBRE"></th>
+        <th><input type="text" id="filter-numero-comprobante" class="form-control" placeholder="NRO COMPROBANTE"></th>
+        <th><input type="text" id="filter-resumen" class="form-control" placeholder="RESUMEN"></th>
+        <th><input type="text" id="filter-monto" class="form-control" placeholder="MONTO"></th>
         <th></th>
         <th></th>
     </tr>
@@ -41,20 +92,42 @@
     </tr>
     </thead>
     <tbody>
-        <tr></tr>
-        <tr th:each="tramite : ${tramites}">
-            <td th:text="${tramite.id}"></td>
-            <td th:text="${tramite.codigo}"></td>
-            <td th:text="${tramite.nombre}"></td>
-            <td th:text="${tramite.numeroComprobante}"></td>
-            <td th:text="${tramite.resumen}"></td>
-            <td th:text="${tramite.monto}"></td>
-            <td th:text="${tramite.fechaConclusion}"></td>
-            <td><a th:href="${tramite.vinculoDocumentoDigital}" th:text="${tramite.vinculoDocumentoDigital}"></a></td>
-        </tr>
+    <tr th:each="tramite : ${tramites}">
+        <td th:text="${tramite.id}"></td>
+        <td th:text="${tramite.codigo}"></td>
+        <td th:text="${tramite.nombre}"></td>
+        <td th:text="${tramite.numeroComprobante}"></td>
+        <td th:text="${tramite.resumen}"></td>
+        <td th:text="${tramite.monto}"></td>
+        <td th:text="${tramite.fechaConclusion}"></td>
+        <td><a th:href="${tramite.vinculoDocumentoDigital}" th:text="${tramite.vinculoDocumentoDigital}"></a></td>
+    </tr>
     </tbody>
 </table>
+
+<footer >
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h5>Archivo Central Ministerio de Economia y Finanzas Publicas</h5>
+                <ul class="list-unstyled">
+                    <li>Dirección: Calle Bolívar, Edificio Bolívar N°688</li>
+                    <li>Esquina Bozo Edificio Ex AADAA (Plaza Alonzo de Mendoza)</li>
+                    <li>Teléfono: (591-2) 218333 - Internos: 4051-4055-4091-4092</li>
+                    <li>Email: fernando.chuquimia@economiayfinanzas.gob.bo</li>
+                </ul>
+            </div>
+
+        </div>
+        <hr>
+        <p class="text-center">© 2023 Todos los derechos reservados</p>
+    </div>
+</footer>
+
 </body>
 <script th:src="@{/js/tramites.js}"></script>
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
 </html>
 
