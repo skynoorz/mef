@@ -8,7 +8,7 @@ import java.util.Set;
 
 @Entity
 @Getter @Setter
-public class User {
+public class Usuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

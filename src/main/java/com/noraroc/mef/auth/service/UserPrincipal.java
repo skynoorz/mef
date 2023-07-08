@@ -1,6 +1,6 @@
 package com.noraroc.mef.auth.service;
 
-import com.noraroc.mef.model.entity.User;
+import com.noraroc.mef.model.entity.Usuario;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -9,25 +9,25 @@ import java.util.Collection;
 import java.util.stream.Collectors;
 
 public class UserPrincipal implements UserDetails {
-    private User user;
+    private Usuario usuario;
 
-    public UserPrincipal(User user) {
-        this.user = user;
+    public UserPrincipal(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return user.getRoles().stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
+        return usuario.getRoles().stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
     }
 
     @Override
     public String getPassword() {
-        return user.getPassword();
+        return usuario.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return user.getUsername();
+        return usuario.getUsername();
     }
 
     @Override

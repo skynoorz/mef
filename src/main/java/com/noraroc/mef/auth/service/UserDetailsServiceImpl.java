@@ -1,7 +1,7 @@
 package com.noraroc.mef.auth.service;
 
 import com.noraroc.mef.model.dao.UserRepository;
-import com.noraroc.mef.model.entity.User;
+import com.noraroc.mef.model.entity.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -15,10 +15,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByUsername(username);
-        if (user == null) {
+        Usuario usuario = userRepository.findByUsername(username);
+        if (usuario == null) {
             throw new UsernameNotFoundException(username);
         }
-        return new UserPrincipal(user);
+        return new UserPrincipal(usuario);
     }
 }
